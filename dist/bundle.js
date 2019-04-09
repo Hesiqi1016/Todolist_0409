@@ -25336,6 +25336,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import '../../css/H-ui.css'
+
 var Todolist = function (_Component) {
 	_inherits(Todolist, _Component);
 
@@ -25345,15 +25347,19 @@ var Todolist = function (_Component) {
 		var _this = _possibleConstructorReturn(this, (Todolist.__proto__ || Object.getPrototypeOf(Todolist)).call(this, props));
 
 		_this.addData = function () {
-			alert(_this.refs.title.value);
+			//alert(this.refs.title.value);
 			// templist=[];
 			// templist=this.state.list;
-			_this.state.list.push(_this.refs.title.value); //返回值是索引值
-			_this.refs.title.value = "";
-			//将该值赋值给list数组，使用setstate改变state.list的状态
-			_this.setState({
-				list: _this.state.list
-			});
+			if (_this.refs.title.value != "") {
+				_this.state.list.push(_this.refs.title.value); //返回值是索引值
+				_this.refs.title.value = "";
+				//将该值赋值给list数组，使用setstate改变state.list的状态
+				_this.setState({
+					list: _this.state.list
+				});
+			} else {
+				alert('请输入待添加项目～');
+			}
 		};
 
 		_this.delData = function (key) {
@@ -25381,43 +25387,73 @@ var Todolist = function (_Component) {
 				"div",
 				null,
 				_react2.default.createElement(
-					"h2",
-					null,
-					"React"
+					"div",
+					{ className: "panel-header" },
+					"React Todolist"
 				),
-				_react2.default.createElement("input", { ref: "title" }),
-				"   ",
 				_react2.default.createElement(
-					"button",
-					{ onClick: this.addData },
-					"\u6DFB\u52A0"
-				),
-				_react2.default.createElement("hr", null),
-				_react2.default.createElement(
-					"ul",
-					null,
-					this.state.list.map(function (value, key) {
-						//使this指向该对象
-						return (
-							//jsx需要一个唯一的根元素
+					"div",
+					{ className: "panel-body" },
+					_react2.default.createElement(
+						"div",
+						{ className: "row cl" },
+						_react2.default.createElement(
+							"div",
+							{ className: "col-xs-4" },
+							_react2.default.createElement("input", { type: "text", className: "input-text", placeholder: "\u8BF7\u8F93\u5165\u9700\u8981\u6DFB\u52A0\u7684\u9879\u76EE", ref: "title" }),
+							"   "
+						),
+						_react2.default.createElement(
+							"div",
+							{ className: "col-xs-2" },
 							_react2.default.createElement(
-								"div",
-								null,
-								_react2.default.createElement(
-									"li",
-									{ key: key },
-									"-------",
-									value,
-									"------"
-								),
-								_react2.default.createElement(
-									"button",
-									{ onClick: _this2.delData.bind(_this2, key) },
-									"\u5220\u9664"
-								)
+								"button",
+								{ className: "btn btn-primary radius", type: "submit", onClick: this.addData },
+								"\u6DFB\u52A0"
 							)
-						);
-					})
+						)
+					),
+					_react2.default.createElement("hr", { "class": "list_hr" }),
+					_react2.default.createElement(
+						"div",
+						{ className: "row cl " },
+						_react2.default.createElement(
+							"div",
+							{ className: "col-xs-6" },
+							_react2.default.createElement(
+								"ul",
+								{ className: "ItemList" },
+								this.state.list.map(function (value, key) {
+									//使this指向该对象
+									return (
+										//jsx需要一个唯一的根元素
+										_react2.default.createElement(
+											"div",
+											{ className: "row cl itemcontent" },
+											_react2.default.createElement(
+												"div",
+												{ className: "col-xs-4" },
+												_react2.default.createElement(
+													"li",
+													{ key: key },
+													value
+												)
+											),
+											_react2.default.createElement(
+												"div",
+												{ className: "col-xs-2" },
+												_react2.default.createElement(
+													"button",
+													{ className: "btn btn-warning radius", onClick: _this2.delData.bind(_this2, key) },
+													"\u5220\u9664"
+												)
+											)
+										)
+									);
+								})
+							)
+						)
+					)
 				)
 			);
 		}

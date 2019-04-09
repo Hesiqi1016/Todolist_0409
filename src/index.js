@@ -8,5 +8,9 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import Todolist from './component/Todolist/Todolist.js'
 
+if (module.hot) {
+    module.hot.accept();
+}
+
 ReactDom.render(
     <Todolist/>, document.getElementById('app'));
