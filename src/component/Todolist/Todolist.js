@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 // import '../../css/H-ui.css'
 
+
 class Todolist extends Component{
 	constructor(props){
 		super(props);
@@ -59,7 +60,9 @@ class Todolist extends Component{
 							<ul className="ItemList">
 							{/* 循环数据 */}
 								{
-									this.state.list.map((value,key)=>{ //使this指向该对象
+									this.state.list.map((value,key)=>{ //使this指向该对象 你无法确定一个方法函数中 this 的指向，因为它的值跟函数的调用方式有关,除非，你使用 箭头函数，因为箭头函数中 this 的值是继承自 外围作用域
+
+										
 										return(
 										//jsx需要一个唯一的根元素
 										<div className="row cl itemcontent">
